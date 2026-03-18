@@ -8,3 +8,5 @@
     - @PutMapping("/{title}/return) to return a video
 - can you briefly explain how the controller class works with the other .java files?
 - I'm still getting a mvn error where it's not recognizing mvn command, i moved it to my program files on my pc and redid the paths accordingly on the environment variables, what else do I need to do
+- I want to continue building this project by implementing a service class for managing video operations. Use dependency injection to connect the service class with the controller class.
+- Please implment and update the files so that it supports serries as well
