@@ -12,18 +12,21 @@ import java.util.Optional;
 @Service
 public class VideoService {
 
+    // In-memory store of Video objects (Movie + Series)
     private final List<Video> videos = new ArrayList<>();
 
+    // Constructor loads initial sample data for demo purposes
     public VideoService() {
-        // Sample data for in-memory demo store
         videos.add(new Movie("The Matrix", "Action"));
         videos.add(new Series("The Office", "Comedy", 1));
     }
 
+    // Return a copy of all videos so caller can't mutate our internal list directly
     public List<Video> getAllVideos() {
         return new ArrayList<>(videos);
     }
 
+    // Return only those videos that are currently available (not rented)
     public List<Video> getAvailableVideos() {
         List<Video> available = new ArrayList<>();
         for (Video v : videos) {
@@ -34,16 +37,19 @@ public class VideoService {
         return available;
     }
 
+    // Add a Movie object to the store
     public Video addMovie(Movie movie) {
         videos.add(movie);
         return movie;
     }
 
+    // Add a Series object to the store
     public Video addSeries(Series series) {
         videos.add(series);
         return series;
     }
 
+    // Find the first matching video by title (case-insensitive)
     public Video findVideoByTitle(String title) {
         if (title == null) {
             return null;
@@ -54,6 +60,7 @@ public class VideoService {
         return found.orElse(null);
     }
 
+    // Mark a video as rented if found and currently available
     public Video rentVideo(String title) {
         Video video = findVideoByTitle(title);
         if (video != null && video.isAvailable()) {
@@ -62,6 +69,7 @@ public class VideoService {
         return video;
     }
 
+    // Mark a video as returned if found and currently not available
     public Video returnVideo(String title) {
         Video video = findVideoByTitle(title);
         if (video != null && !video.isAvailable()) {
